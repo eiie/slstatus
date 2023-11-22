@@ -165,7 +165,7 @@
 		struct ieee80211_nodereq nr;
 
 		if (load_ieee80211_nodereq(interface, &nr))
-			return bprintf("%s", nr.nr_nwid);
+			return bprintf("aa %s", nr.nr_nwid);
 
 		return NULL;
 	}

@@ -1,0 +1,23 @@
+#/bin/sh
+
+if [ $(cat /sys/class/net/w*/operstate 2>/dev/null) = up ]
+then
+	wifiIcon="直"
+	ssid=$(iw $(ls /sys/class/net/w*/..) info | grep ssid | cut -d " " -f 2)
+fi
+
+if [ $(cat /sys/class/net/e*/operstate 2>/dev/null) = up ]
+then
+	ethIcon=""
+else
+	if [ ! $wifiIcon ]; then
+		wifiIcon="睊"
+	fi
+fi
+
+if [ -z "$ssid" ]
+then
+	echo "$ethIcon$wifiIcon"
+else
+	echo "$wifiIcon $ssid"
+fi

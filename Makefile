@@ -45,6 +45,7 @@ slstatus: slstatus.o $(COM:=.o) $(REQ:=.o)
 
 clean:
 	rm -f slstatus slstatus.o $(COM:=.o) $(REQ:=.o) slstatus-${VERSION}.tar.gz
+	rm -f config.h
 
 dist:
 	rm -rf "slstatus-$(VERSION)"
@@ -63,6 +64,10 @@ install: all
 	mkdir -p "$(DESTDIR)$(MANPREFIX)/man1"
 	cp -f slstatus.1 "$(DESTDIR)$(MANPREFIX)/man1"
 	chmod 644 "$(DESTDIR)$(MANPREFIX)/man1/slstatus.1"
+	mkdir -p ~/.local/bin
+	cp -f scripts/* "$(DESTDIR)$(PREFIX)/bin"
+	chmod 755 "$(DESTDIR)$(PREFIX)/bin/wifi_ssid"
+	chmod 755 "$(DESTDIR)$(PREFIX)/bin/volume_perc"
 
 uninstall:
 	rm -f "$(DESTDIR)$(PREFIX)/bin/slstatus"
