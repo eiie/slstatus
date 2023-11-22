@@ -1,1 +1,9 @@
-awk -F"[][]" '/Left:/ { print $2 }' <(amixer sget Master)
+vol=$(awk -F"[][]" '/Left:/ { print $2 }' <(amixer sget Master))
+state=$(awk -F"[][]" '/Left:/ { print $4 }' <(amixer sget Master))
+
+if [ $state == "on" ]
+then
+	echo " $vol"
+else
+	echo "🔇"
+fi
